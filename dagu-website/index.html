@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dagu Perfume — Luxury Fragrance Boutique</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,200;0,300;0,400;0,600;1,200;1,300;1,400&family=Jost:wght@100;200;300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --brand:rgb(110,19,36);
+  --brand-deep:rgb(72,10,22);
+  --brand-mid:rgb(140,30,50);
+  --brand-light:rgba(110,19,36,.12);
+  --brand-faint:rgba(110,19,36,.06);
+  --gold:#c8a050;
+  --gold2:#e8c880;
+  --cream:#f5ede0;
+  --cream2:#d8c8b0;
+  --white:#faf6f0;
+  --dark:#0e0608;
+  --card:rgba(20,6,10,0.96);
+  --card2:rgba(28,8,14,0.98);
+  --border:rgba(200,160,80,.15);
+  --border2:rgba(200,160,80,.3);
+  --glass:rgba(110,19,36,.18);
+  --serif:'Cormorant Garamond',serif;
+  --sans:'Jost',sans-serif;
+  --men:#6ab0e8;
+  --women:#e88ab0;
+  --unisex:#8ae8a0;
+}
+
+html{scroll-behavior:smooth;}
+body{background:var(--dark);color:var(--cream);font-family:var(--sans);font-weight:300;overflow-x:hidden;cursor:none;}
+::-webkit-scrollbar{width:2px;}
+::-webkit-scrollbar-track{background:var(--dark);}
+::-webkit-scrollbar-thumb{background:var(--brand);}
+
+/* ── CURSOR ── */
+#cur{position:fixed;width:7px;height:7px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);transition:background .2s;}
+#cur2{position:fixed;width:28px;height:28px;border:1px solid rgba(200,160,80,.4);border-radius:50%;pointer-events:none;z-index:99998;transform:translate(-50%,-50%);transition:width .3s,height .3s,border-color .25s,background .25s;}
+body.hov #cur{background:var(--brand);}
+body.hov #cur2{width:46px;height:46px;border-color:var(--brand-mid);background:rgba(110,19,36,.08);}
+
+/* ── PRELOADER ── */
+#preloader{position:fixed;inset:0;z-index:200000;background:var(--brand-deep);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:20px;transition:opacity 1s,transform 1s;}
+#preloader.out{opacity:0;pointer-events:none;}
+.pre-logo-wrap{display:flex;align-items:center;justify-content:center;}
+.pre-logo-img{width:120px;opacity:0;transform:scale(.85);transition:all 1s .2s;}
+#preloader.ready .pre-logo-img{opacity:1;transform:scale(1);}
+.pre-bar-wrap{width:180px;height:1px;background:rgba(200,160,80,.2);overflow:hidden;}
+.pre-bar{height:100%;background:var(--gold);width:0;transition:width 1.4s .4s ease-out;}
+#preloader.ready .pre-bar{width:100%;}
+.pre-text{font-family:var(--sans);font-size:9px;letter-spacing:.5em;text-transform:uppercase;color:rgba(200,160,80,.6);opacity:0;transition:opacity .8s .3s;}
+#preloader.ready .pre-text{opacity:1;}
+
+/* ── HEADER ── */
+header{position:sticky;top:0;z-index:9000;transition:all .4s;}
+.header-inner{display:flex;align-items:center;justify-content:space-between;padding:0 52px;height:72px;background:rgba(14,6,8,.92);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid rgba(110,19,36,.3);transition:height .4s,background .4s;}
+header.scrolled .header-inner{height:60px;background:rgba(10,3,6,.97);border-bottom-color:rgba(200,160,80,.15);}
+.logo-svg{height:40px;width:auto;transition:height .3s;}
+header.scrolled .logo-svg{height:34px;}
+.logo-svg-footer{height:52px;width:auto;}
+.logo-svg-pre{height:80px;width:auto;}
+.nav-links{display:flex;gap:36px;list-style:none;}
+.nav-links a{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(245,237,224,.5);text-decoration:none;transition:color .25s;}
+.nav-links a:hover{color:var(--gold);}
+.header-right{display:flex;align-items:center;gap:16px;}
+.search-wrap{position:relative;}
+.search-icon{position:absolute;left:11px;top:50%;transform:translateY(-50%);font-size:12px;color:rgba(200,160,80,.5);pointer-events:none;}
+#searchInput{background:rgba(110,19,36,.2);border:1px solid rgba(110,19,36,.4);outline:none;padding:8px 14px 8px 32px;font-family:var(--sans);font-size:11px;color:var(--cream);width:240px;letter-spacing:.04em;transition:border-color .3s,background .3s;}
+#searchInput::placeholder{color:rgba(245,237,224,.2);}
+#searchInput:focus{border-color:rgba(200,160,80,.4);background:rgba(110,19,36,.3);}
+.tg-btn{display:inline-flex;align-items:center;gap:7px;padding:9px 20px;background:var(--brand);border:none;color:var(--cream);font-family:var(--sans);font-size:10px;letter-spacing:.15em;text-transform:uppercase;cursor:none;text-decoration:none;transition:background .3s;}
+.tg-btn:hover{background:var(--brand-mid);}
+
+/* ── HERO ── */
+#hero{height:100vh;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.hero-canvas{position:absolute;inset:0;}
+#heroCanvas{width:100%;height:100%;}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(14,6,8,.3) 0%,rgba(14,6,8,.1) 40%,rgba(14,6,8,.85) 100%);}
+.hero-content{position:relative;z-index:5;text-align:center;padding:0 20px;}
+.hero-eyebrow{font-size:9px;letter-spacing:.6em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;opacity:0;animation:fup .9s .6s forwards;}
+.hero-h1{font-family:var(--serif);font-size:clamp(52px,8vw,116px);font-weight:200;line-height:.9;margin-bottom:28px;opacity:0;animation:fup 1.2s .9s forwards;}
+.hero-h1 em{font-style:italic;color:var(--gold);display:block;}
+.hero-sub{font-size:13px;letter-spacing:.06em;color:rgba(245,237,224,.55);margin-bottom:44px;opacity:0;animation:fup .9s 1.2s forwards;}
+.hero-btns{display:flex;gap:12px;justify-content:center;opacity:0;animation:fup .8s 1.5s forwards;}
+.btn-primary{padding:15px 44px;background:var(--brand);color:var(--cream);border:none;font-family:var(--sans);font-size:10px;letter-spacing:.25em;text-transform:uppercase;cursor:none;text-decoration:none;transition:background .3s,transform .2s;display:inline-block;}
+.btn-primary:hover{background:var(--brand-mid);transform:translateY(-1px);}
+.btn-outline{padding:15px 44px;border:1px solid rgba(200,160,80,.4);color:var(--gold);background:none;font-family:var(--sans);font-size:10px;letter-spacing:.25em;text-transform:uppercase;cursor:none;text-decoration:none;transition:all .3s;display:inline-block;}
+.btn-outline:hover{background:rgba(200,160,80,.1);border-color:var(--gold);}
+.hero-scroll{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:10px;opacity:0;animation:fup .7s 2s forwards;}
+.hero-scroll span{font-size:8px;letter-spacing:.4em;text-transform:uppercase;color:rgba(245,237,224,.3);}
+.scroll-line{width:1px;height:44px;background:linear-gradient(to bottom,var(--gold),transparent);animation:sAnim 2s ease-in-out infinite;}
+@keyframes sAnim{0%,100%{opacity:1}50%{opacity:.2}}
+@keyframes fup{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── STATS STRIP ── */
+.stats-strip{background:var(--brand-deep);border-top:1px solid rgba(200,160,80,.1);border-bottom:1px solid rgba(200,160,80,.1);padding:24px 52px;display:flex;justify-content:center;gap:80px;}
+.stat{text-align:center;}
+.stat-n{font-family:var(--serif);font-size:36px;font-weight:200;color:var(--gold);line-height:1;}
+.stat-l{font-size:9px;letter-spacing:.25em;text-transform:uppercase;color:rgba(245,237,224,.35);margin-top:4px;}
+
+/* ── FILTERS ── */
+.filters-bar{padding:16px 52px;background:rgba(14,6,8,.95);backdrop-filter:blur(20px);border-bottom:1px solid rgba(110,19,36,.25);position:sticky;top:60px;z-index:4000;display:flex;gap:7px;flex-wrap:wrap;align-items:center;}
+.f-label{font-size:8px;letter-spacing:.4em;text-transform:uppercase;color:rgba(245,237,224,.2);margin-right:6px;}
+.pill{padding:6px 16px;border:1px solid rgba(110,19,36,.4);background:none;color:rgba(245,237,224,.4);font-family:var(--sans);font-size:9px;letter-spacing:.12em;text-transform:uppercase;cursor:none;transition:all .22s;white-space:nowrap;}
+.pill:hover{background:rgba(110,19,36,.3);color:var(--cream);border-color:rgba(110,19,36,.6);}
+.pill.active{background:var(--brand);color:var(--cream);border-color:var(--brand);}
+
+/* ── LAYOUT ── */
+.page-body{display:flex;min-height:100vh;}
+
+/* SIDEBAR */
+.sidebar{width:210px;flex-shrink:0;position:sticky;top:114px;height:calc(100vh - 114px);overflow-y:auto;border-right:1px solid rgba(110,19,36,.2);padding:24px 0;background:rgba(10,2,5,.98);}
+.sidebar::-webkit-scrollbar{width:1px;}
+.sidebar::-webkit-scrollbar-thumb{background:rgba(110,19,36,.3);}
+.snav-hd{font-size:7px;letter-spacing:.45em;text-transform:uppercase;color:rgba(200,160,80,.3);padding:0 20px;margin-bottom:12px;}
+.snav-item{display:flex;align-items:center;gap:9px;padding:9px 20px;cursor:none;transition:all .2s;border-left:2px solid transparent;}
+.snav-item:hover,.snav-item.active{border-left-color:var(--brand-mid);background:rgba(110,19,36,.12);}
+.snav-emoji{font-size:14px;}
+.snav-text{font-size:10px;color:rgba(245,237,224,.45);transition:color .2s;white-space:nowrap;}
+.snav-item:hover .snav-text,.snav-item.active .snav-text{color:var(--gold);}
+.snav-n{font-size:8px;color:rgba(200,160,80,.3);margin-left:auto;}
+.snav-sep{height:1px;background:rgba(110,19,36,.2);margin:10px 20px;}
+
+/* CONTENT */
+.content{flex:1;min-width:0;padding-bottom:80px;}
+
+/* ── SECTION ── */
+.cat-sec{border-bottom:1px solid rgba(110,19,36,.15);}
+.sec-head{padding:52px 44px 28px;position:relative;overflow:hidden;display:flex;justify-content:space-between;align-items:flex-end;}
+.sec-head::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(110,19,36,.12),transparent 60%);pointer-events:none;}
+.sec-head::after{content:attr(data-emoji);position:absolute;right:44px;top:50%;transform:translateY(-50%);font-size:88px;opacity:.055;pointer-events:none;line-height:1;}
+.sh-left .sh-tag{font-size:8px;letter-spacing:.5em;text-transform:uppercase;color:var(--gold);margin-bottom:9px;}
+.sh-left .sh-title{font-family:var(--serif);font-size:clamp(28px,4vw,52px);font-weight:200;line-height:1.0;}
+.sh-left .sh-sub{font-size:11px;color:rgba(245,237,224,.4);margin-top:8px;max-width:440px;line-height:1.75;}
+.sh-right{text-align:right;flex-shrink:0;}
+.sh-count{font-family:var(--serif);font-size:46px;font-weight:200;color:var(--brand-mid);line-height:1;}
+.sh-count-l{font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:rgba(245,237,224,.3);margin-top:3px;}
+
+/* ── PERFUME GRID ── */
+.p-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1px;background:rgba(110,19,36,.08);}
+
+/* ── PERFUME CARD ── */
+.pcard{background:var(--card);cursor:none;position:relative;transition:background .25s;opacity:0;animation:cardIn .4s forwards;}
+@keyframes cardIn{to{opacity:1}}
+.pcard:hover{background:var(--card2);}
+.pcard::after{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(200,160,80,0),transparent);transition:background .3s;}
+.pcard:hover::after{background:linear-gradient(90deg,transparent,var(--gold),transparent);}
+
+/* bottle image area */
+.pcard-img{aspect-ratio:1/1;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;background:linear-gradient(135deg,rgba(110,19,36,.15),rgba(14,6,8,.8));}
+.pcard-img-bg{position:absolute;inset:0;opacity:.15;transition:opacity .4s,transform .5s;}
+.pcard:hover .pcard-img-bg{opacity:.25;transform:scale(1.04);}
+.pcard-bottle{font-size:64px;position:relative;z-index:2;transition:transform .5s cubic-bezier(.34,1.56,.64,1),filter .4s;filter:drop-shadow(0 12px 28px rgba(110,19,36,.5));}
+.pcard:hover .pcard-bottle{transform:translateY(-8px) scale(1.06);filter:drop-shadow(0 20px 40px rgba(200,160,80,.3));}
+.pcard-hover-hint{position:absolute;bottom:12px;left:50%;transform:translateX(-50%) translateY(8px);background:rgba(110,19,36,.85);backdrop-filter:blur(10px);color:var(--cream);font-size:8px;letter-spacing:.2em;text-transform:uppercase;padding:6px 14px;opacity:0;transition:opacity .3s,transform .3s;white-space:nowrap;border:1px solid rgba(200,160,80,.2);}
+.pcard:hover .pcard-hover-hint{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* card info */
+.pcard-info{padding:16px 18px 18px;}
+.pcard-brand{font-size:7px;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);margin-bottom:3px;}
+.pcard-name{font-family:var(--serif);font-size:17px;font-weight:300;line-height:1.2;color:var(--cream);margin-bottom:8px;}
+.pcard-badges{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:10px;}
+.badge{font-size:7px;letter-spacing:.1em;text-transform:uppercase;padding:2px 7px;}
+.badge-m{background:rgba(106,176,232,.1);border:1px solid rgba(106,176,232,.2);color:var(--men);}
+.badge-w{background:rgba(232,138,176,.1);border:1px solid rgba(232,138,176,.2);color:var(--women);}
+.badge-u{background:rgba(138,232,160,.08);border:1px solid rgba(138,232,160,.18);color:var(--unisex);}
+.badge-size{background:rgba(200,160,80,.07);border:1px solid rgba(200,160,80,.15);color:rgba(245,237,224,.5);}
+.badge-orig{background:rgba(200,160,80,.12);border:1px solid rgba(200,160,80,.22);color:var(--gold);}
+.badge-clone{background:rgba(110,19,36,.15);border:1px solid rgba(110,19,36,.3);color:rgba(245,237,224,.5);}
+.pcard-price{font-family:var(--serif);font-size:19px;font-weight:300;color:var(--gold2);}
+.pcard-price-na{font-family:var(--serif);font-size:14px;font-style:italic;color:rgba(200,160,80,.35);}
+
+/* ── DETAIL PANEL (slide-in side drawer) ── */
+#detailPanel{position:fixed;top:0;right:0;bottom:0;width:420px;z-index:50000;transform:translateX(100%);transition:transform .55s cubic-bezier(.76,0,.24,1);display:flex;flex-direction:column;background:rgba(16,4,8,.98);border-left:1px solid rgba(110,19,36,.35);backdrop-filter:blur(30px);}
+#detailPanel.open{transform:translateX(0);}
+.dp-close{position:absolute;top:20px;right:20px;background:rgba(110,19,36,.3);border:1px solid rgba(200,160,80,.2);color:var(--cream);width:36px;height:36px;cursor:none;font-size:14px;transition:all .25s;z-index:2;}
+.dp-close:hover{background:var(--brand);border-color:var(--brand);}
+.dp-img{height:280px;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;background:linear-gradient(135deg,rgba(110,19,36,.25),rgba(10,2,5,.9));}
+.dp-img-bg{position:absolute;inset:0;opacity:.2;}
+.dp-bottle{font-size:110px;position:relative;z-index:2;filter:drop-shadow(0 20px 50px rgba(200,160,80,.3));animation:dpFloat 3s ease-in-out infinite;}
+@keyframes dpFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.dp-shimmer{position:absolute;bottom:0;left:0;right:0;height:100px;background:linear-gradient(to top,rgba(16,4,8,.98),transparent);}
+.dp-body{flex:1;overflow-y:auto;padding:28px 32px 32px;}
+.dp-body::-webkit-scrollbar{width:1px;}
+.dp-body::-webkit-scrollbar-thumb{background:rgba(110,19,36,.4);}
+.dp-no{font-size:9px;letter-spacing:.4em;text-transform:uppercase;color:rgba(200,160,80,.4);margin-bottom:8px;}
+.dp-brand{font-size:9px;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;}
+.dp-name{font-family:var(--serif);font-size:30px;font-weight:300;line-height:1.1;color:var(--cream);margin-bottom:14px;}
+.dp-badges{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:20px;}
+.dp-divider{height:1px;background:linear-gradient(90deg,rgba(110,19,36,.5),transparent);margin:20px 0;}
+.dp-label{font-size:8px;letter-spacing:.4em;text-transform:uppercase;color:rgba(200,160,80,.4);margin-bottom:8px;}
+.dp-vibe{font-size:13px;line-height:1.8;color:rgba(245,237,224,.65);font-style:italic;margin-bottom:20px;}
+.dp-price-row{display:flex;align-items:center;justify-content:space-between;background:rgba(110,19,36,.15);border:1px solid rgba(110,19,36,.25);padding:16px 20px;margin-bottom:20px;}
+.dp-price-lbl{font-size:8px;letter-spacing:.25em;text-transform:uppercase;color:rgba(245,237,224,.35);}
+.dp-price-val{font-family:var(--serif);font-size:28px;font-weight:300;color:var(--gold2);}
+.dp-price-na{font-family:var(--serif);font-size:18px;font-style:italic;color:rgba(200,160,80,.35);}
+.dp-order-btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:16px;background:var(--brand);border:none;color:var(--cream);font-family:var(--sans);font-size:10px;letter-spacing:.25em;text-transform:uppercase;cursor:none;transition:background .3s;text-decoration:none;margin-bottom:12px;}
+.dp-order-btn:hover{background:var(--brand-mid);}
+.dp-call-row{display:flex;gap:8px;}
+.dp-call{flex:1;padding:11px;border:1px solid rgba(110,19,36,.35);background:none;color:rgba(245,237,224,.55);font-family:var(--sans);font-size:9px;letter-spacing:.1em;text-transform:uppercase;cursor:none;transition:all .25s;text-align:center;text-decoration:none;display:flex;align-items:center;justify-content:center;}
+.dp-call:hover{background:rgba(110,19,36,.2);color:var(--cream);}
+
+/* ── PANEL BACKDROP (doesn't block content) ── */
+#dpBackdrop{position:fixed;top:0;left:0;bottom:0;width:calc(100% - 420px);z-index:49999;background:rgba(14,6,8,.4);opacity:0;pointer-events:none;transition:opacity .4s;backdrop-filter:blur(3px);}
+#dpBackdrop.open{opacity:1;pointer-events:all;}
+
+/* ── EMPTY STATE ── */
+.empty{grid-column:1/-1;padding:60px;text-align:center;}
+.empty p{font-family:var(--serif);font-size:24px;font-weight:200;color:rgba(245,237,224,.15);}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(36px);transition:opacity .8s,transform .8s;}
+.reveal.vis{opacity:1;transform:translateY(0);}
+
+/* ── CONTACT STRIP ── */
+.contact-strip{background:var(--brand-deep);border-top:1px solid rgba(200,160,80,.1);padding:52px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:40px;}
+.cs-item .cs-ico{font-size:22px;margin-bottom:10px;}
+.cs-item .cs-lbl{font-size:8px;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;}
+.cs-item .cs-val{font-family:var(--serif);font-size:18px;font-weight:300;}
+.cs-item a{color:var(--cream);text-decoration:none;transition:color .25s;}
+.cs-item a:hover{color:var(--gold);}
+
+/* ── FOOTER ── */
+footer{background:var(--brand-deep);border-top:1px solid rgba(110,19,36,.4);}
+.footer-top{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:56px;padding:60px 52px 40px;}
+.footer-logo{margin-bottom:16px;}
+.footer-logo svg{height:48px;width:auto;}
+.footer-tagline{font-size:12px;color:rgba(245,237,224,.35);line-height:1.85;max-width:260px;margin-bottom:28px;}
+.nl-wrap{position:relative;border-bottom:1px solid rgba(200,160,80,.2);padding-bottom:12px;}
+.nl-lbl{position:absolute;top:0;left:0;font-size:10px;letter-spacing:.08em;color:rgba(245,237,224,.25);transition:all .3s;pointer-events:none;}
+.nl-input{background:none;border:none;outline:none;font-family:var(--sans);font-size:13px;color:var(--cream);width:calc(100% - 32px);padding-top:16px;caret-color:var(--gold);}
+.nl-input:focus~.nl-lbl,.nl-input:not(:placeholder-shown)~.nl-lbl{top:-14px;font-size:8px;color:var(--gold);letter-spacing:.3em;}
+.nl-submit{position:absolute;right:0;bottom:10px;background:none;border:none;color:var(--gold);cursor:none;font-size:16px;transition:transform .25s;}
+.nl-submit:hover{transform:translateX(3px);}
+.f-head{font-size:8px;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);margin-bottom:18px;}
+.f-links{list-style:none;display:flex;flex-direction:column;gap:10px;}
+.f-links a{font-size:12px;color:rgba(245,237,224,.4);text-decoration:none;transition:color .25s;}
+.f-links a:hover{color:var(--gold);}
+
+/* MAP */
+.map-section{height:320px;position:relative;overflow:hidden;border-top:1px solid rgba(110,19,36,.3);}
+.map-section iframe{width:100%;height:100%;border:none;filter:grayscale(60%) sepia(20%) hue-rotate(310deg) brightness(.7) contrast(1.1);}
+.map-overlay{position:absolute;inset:0;pointer-events:none;border-top:3px solid var(--brand);}
+.map-pin{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:var(--brand);color:var(--cream);padding:10px 20px;font-family:var(--sans);font-size:10px;letter-spacing:.15em;text-transform:uppercase;border:1px solid rgba(200,160,80,.3);pointer-events:all;cursor:none;white-space:nowrap;}
+
+/* FOOTER BOTTOM */
+.footer-bottom{padding:24px 52px;border-top:1px solid rgba(110,19,36,.2);display:flex;justify-content:space-between;align-items:center;}
+.footer-copy{font-size:10px;color:rgba(245,237,224,.2);letter-spacing:.05em;}
+.social-row{display:flex;gap:12px;flex-wrap:wrap;}
+.soc-big-btn{display:inline-flex;align-items:center;gap:10px;padding:15px 30px;font-family:var(--sans);font-size:13px;font-weight:400;letter-spacing:.06em;text-decoration:none;cursor:none;transition:all .3s;white-space:nowrap;border:none;}
+.soc-tg{background:#229ED9;color:#fff;}
+.soc-tg:hover{background:#1a8fc4;transform:translateY(-2px);box-shadow:0 8px 24px rgba(34,158,217,.3);}
+.soc-tt{background:#111010;color:#fff;border:1px solid rgba(255,255,255,.1);}
+.soc-tt:hover{background:#222;transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.4);}
+
+/* GRAIN */
+body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.03'/%3E%3C/svg%3E");pointer-events:none;z-index:99990;opacity:.3;}
+
+/* RESPONSIVE */
+@media(max-width:1100px){.sidebar{display:none;}.page-body{display:block;}}
+@media(max-width:900px){
+  .header-inner{padding:0 20px;}
+  .nav-links{display:none;}
+  .hero-h1{font-size:clamp(40px,12vw,72px);}
+  .stats-strip{gap:32px;padding:20px;}
+  .filters-bar{padding:12px 20px;}
+  .contact-strip{grid-template-columns:1fr;padding:36px 20px;}
+  .footer-top{grid-template-columns:1fr;gap:32px;padding:40px 20px 24px;}
+  .footer-bottom{padding:20px;flex-direction:column;gap:12px;}
+  #detailPanel{width:100%;}
+  #dpBackdrop{display:none;}
+  #searchInput{width:160px;}
+}
+</style>
+</head>
+<body>
+
+<div id="cur"></div>
+<div id="cur2"></div>
+
+<!-- PRELOADER -->
+<div id="preloader">
+  <div class="pre-logo-wrap">
+    <svg class="pre-logo-img" viewBox="0 0 320 110" xmlns="http://www.w3.org/2000/svg" style="width:220px;height:auto;">
+      <rect x="22" y="4" width="36" height="7" rx="2" fill="white"/>
+      <circle cx="40" cy="7.5" r="2" fill="#6E1324"/>
+      <rect x="30" y="11" width="20" height="8" rx="1" fill="white"/>
+      <rect x="18" y="19" width="13" height="86" rx="0" fill="white"/>
+      <path d="M31,19 L50,19 Q100,19 100,62 Q100,105 50,105 L31,105 L31,92 L50,92 Q84,92 84,62 Q84,32 50,32 L31,32 Z" fill="white"/>
+      <path d="M46,40 Q80,46 76,66 Q72,84 46,90 Q66,76 63,64 Q60,52 46,40 Z" fill="#6E1324"/>
+      <text x="108" y="103" font-family="Georgia,'Times New Roman',Times,serif" font-size="88" font-weight="normal" fill="white" letter-spacing="0">AGU</text>
+    </svg>
+  </div>
+  <div class="pre-bar-wrap"><div class="pre-bar"></div></div>
+  <p class="pre-text">Loading Collection</p>
+</div>
+
+<!-- HEADER -->
+<header id="mainHeader">
+  <div class="header-inner">
+    <!-- DAGU SVG LOGO - header -->
+    <svg class="logo-svg" viewBox="0 0 320 110" xmlns="http://www.w3.org/2000/svg" aria-label="Dagu Perfume">
+      <rect x="22" y="4" width="36" height="7" rx="2" fill="white"/>
+      <circle cx="40" cy="7.5" r="2" fill="#6E1324"/>
+      <rect x="30" y="11" width="20" height="8" rx="1" fill="white"/>
+      <rect x="18" y="19" width="13" height="86" rx="0" fill="white"/>
+      <path d="M31,19 L50,19 Q100,19 100,62 Q100,105 50,105 L31,105 L31,92 L50,92 Q84,92 84,62 Q84,32 50,32 L31,32 Z" fill="white"/>
+      <path d="M46,40 Q80,46 76,66 Q72,84 46,90 Q66,76 63,64 Q60,52 46,40 Z" fill="#6E1324"/>
+      <text x="108" y="103" font-family="Georgia,'Times New Roman',Times,serif" font-size="88" font-weight="normal" fill="white" letter-spacing="0">AGU</text>
+    </svg>
+    <ul class="nav-links">
+      <li><a href="#sec-kings">For Kings</a></li>
+      <li><a href="#sec-queens">For Queens</a></li>
+      <li><a href="#sec-oud">Oud</a></li>
+      <li><a href="#sec-designer">Designer</a></li>
+      <li><a href="#footer">Contact</a></li>
+    </ul>
+    <div class="header-right">
+      <div class="search-wrap">
+        <span class="search-icon">⌕</span>
+        <input id="searchInput" type="text" placeholder="Search perfume…" oninput="doSearch()">
+      </div>
+      <button class="tg-btn" onclick="document.getElementById('searchInput').focus()" style="cursor:none;">⌕ Search</button>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-canvas"><canvas id="heroCanvas"></canvas></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Addis Ababa · Bole Bora Kids Mall</p>
+    <h1 class="hero-h1">Luxury Scents<br><em>Honest Prices</em></h1>
+    <p class="hero-sub">168 fragrances — Designer originals, premium clones & rare Arabic exclusives</p>
+    <div class="hero-btns">
+      <a href="#sec-kings" class="btn-primary">Explore Collection</a>
+      <a href="https://t.me/dagu_perfume" target="_blank" class="btn-outline">Order on Telegram</a>
+    </div>
+  </div>
+  <div class="hero-scroll"><div class="scroll-line"></div><span>Scroll</span></div>
+</section>
+
+<!-- STATS -->
+<div class="stats-strip reveal">
+  <div class="stat"><div class="stat-n">168</div><div class="stat-l">Fragrances</div></div>
+  <div class="stat"><div class="stat-n">15+</div><div class="stat-l">Brands</div></div>
+  <div class="stat"><div class="stat-n">100%</div><div class="stat-l">Authentic</div></div>
+  <div class="stat"><div class="stat-n">ETB</div><div class="stat-l">All Prices</div></div>
+</div>
+
+<!-- FILTERS -->
+<div class="filters-bar" id="filtersBar">
+  <span class="f-label">Filter</span>
+  <button class="pill active" onclick="setFilter('all',this)">All 168</button>
+  <button class="pill" onclick="setFilter('men',this)">👑 Kings</button>
+  <button class="pill" onclick="setFilter('women',this)">🌹 Queens</button>
+  <button class="pill" onclick="setFilter('unisex',this)">⚖️ Unisex</button>
+  <button class="pill" onclick="setFilter('oud',this)">🕌 Oud</button>
+  <button class="pill" onclick="setFilter('fresh',this)">🌊 Fresh</button>
+  <button class="pill" onclick="setFilter('sweet',this)">🍯 Sweet</button>
+  <button class="pill" onclick="setFilter('woody',this)">🪵 Woody</button>
+  <button class="pill" onclick="setFilter('designer',this)">💎 Originals</button>
+  <button class="pill" onclick="setFilter('budget',this)">Under 5k Br</button>
+  <button class="pill" onclick="setFilter('above5k',this)">Above 5k Br</button>
+  <button class="pill" onclick="setFilter('clone',this)">🔄 Dupe / Clone</button>
+</div>
+
+<!-- BODY -->
+<div class="page-body">
+  <!-- SIDEBAR -->
+  <nav class="sidebar" id="sideNav">
+    <div class="snav-hd">Sections</div>
+    <div class="snav-item" onclick="goTo('sec-kings')"><span class="snav-emoji">👑</span><span class="snav-text">For Kings</span><span class="snav-n">41</span></div>
+    <div class="snav-item" onclick="goTo('sec-queens')"><span class="snav-emoji">🌹</span><span class="snav-text">For Queens</span><span class="snav-n">34</span></div>
+    <div class="snav-item" onclick="goTo('sec-oud')"><span class="snav-emoji">🕌</span><span class="snav-text">Oud & Arabian</span><span class="snav-n">18</span></div>
+    <div class="snav-item" onclick="goTo('sec-fresh')"><span class="snav-emoji">🌊</span><span class="snav-text">Fresh & Aquatic</span><span class="snav-n">11</span></div>
+    <div class="snav-item" onclick="goTo('sec-woody')"><span class="snav-emoji">🪵</span><span class="snav-text">Woody & Leather</span><span class="snav-n">9</span></div>
+    <div class="snav-item" onclick="goTo('sec-sweet')"><span class="snav-emoji">🍯</span><span class="snav-text">Sweet & Gourmand</span><span class="snav-n">15</span></div>
+    <div class="snav-item" onclick="goTo('sec-unisex')"><span class="snav-emoji">⚖️</span><span class="snav-text">Iconic Unisex</span><span class="snav-n">13</span></div>
+    <div class="snav-item" onclick="goTo('sec-designer')"><span class="snav-emoji">💎</span><span class="snav-text">Designer Originals</span><span class="snav-n">10</span></div>
+    <div class="snav-item" onclick="goTo('sec-sets')"><span class="snav-emoji">🎁</span><span class="snav-text">Sets & Extras</span><span class="snav-n">20</span></div>
+    <div class="snav-sep"></div>
+    <div class="snav-hd">Order</div>
+    <div class="snav-item" onclick="window.open('https://t.me/dagu_perfume','_blank')"><span class="snav-emoji">✈️</span><span class="snav-text">Telegram</span></div>
+    <div class="snav-item"><span class="snav-emoji">📞</span><span class="snav-text">0993337235</span></div>
+    <div class="snav-item"><span class="snav-emoji">📞</span><span class="snav-text">0949064149</span></div>
+  </nav>
+  <!-- CONTENT -->
+  <div class="content" id="content"></div>
+</div>
+
+<!-- DETAIL PANEL -->
+<div id="dpBackdrop" onclick="closePanel()"></div>
+<div id="detailPanel">
+  <button class="dp-close" onclick="closePanel()">✕</button>
+  <div class="dp-img" id="dpImg">
+    <div class="dp-img-bg" id="dpImgBg"></div>
+    <div class="dp-bottle" id="dpBottle">🌹</div>
+    <div class="dp-shimmer"></div>
+  </div>
+  <div class="dp-body">
+    <div class="dp-no" id="dpNo">—</div>
+    <div class="dp-brand" id="dpBrand">—</div>
+    <div class="dp-name" id="dpName">—</div>
+    <div class="dp-badges" id="dpBadges"></div>
+    <div class="dp-divider"></div>
+    <div class="dp-label">Scent Profile</div>
+    <div class="dp-vibe" id="dpVibe">—</div>
+    <div class="dp-divider"></div>
+    <div class="dp-price-row">
+      <div><div class="dp-price-lbl">Price</div><div id="dpPrice" class="dp-price-val">—</div></div>
+      <div id="dpSizeBadge"></div>
+    </div>
+    <div class="dp-call-row" style="margin-bottom:12px;">
+      <a class="dp-order-btn" href="tel:0993337235" style="background:var(--brand);margin-bottom:0;flex:1;gap:8px;">📞 Call 0993337235</a>
+    </div>
+    <div class="dp-call-row">
+      <a class="dp-order-btn" href="tel:0949064149" style="background:rgba(110,19,36,.6);border:1px solid rgba(110,19,36,.5);margin-bottom:0;flex:1;gap:8px;">📞 Call 0949064149</a>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT STRIP -->
+<div class="contact-strip reveal" id="contact">
+  <div class="cs-item">
+    <div class="cs-ico">📍</div>
+    <div class="cs-lbl">Location</div>
+    <div class="cs-val">Bole, Bora Kids Mall<br>Ground Floor G-02</div>
+  </div>
+  <div class="cs-item">
+    <div class="cs-ico">📞</div>
+    <div class="cs-lbl">Phone</div>
+    <div class="cs-val"><a href="tel:0993337235">0993337235</a><br><a href="tel:0949064149">0949064149</a></div>
+  </div>
+  <div class="cs-item">
+    <div class="cs-ico">✈️</div>
+    <div class="cs-lbl">Telegram</div>
+    <div class="cs-val"><a href="https://t.me/dagu_perfume" target="_blank">@dagu_perfume</a></div>
+  </div>
+</div>
+
+<!-- MAP -->
+<div class="map-section">
+  <iframe
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3940.5!2d38.7991!3d9.0068!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x164b85cef5ab402d%3A0x8467b6b037a24d49!2sBole%2C%20Addis%20Ababa!5e0!3m2!1sen!2set!4v1700000000000"
+    allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Dagu Perfume Location"></iframe>
+  <div class="map-overlay">
+    <div class="map-pin">📍 Dagu Perfume — Bole, Bora Kids Mall G-02</div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer id="footer">
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo">
+        <svg class="logo-svg-footer" viewBox="0 0 320 110" xmlns="http://www.w3.org/2000/svg" aria-label="Dagu Perfume">
+          <rect x="22" y="4" width="36" height="7" rx="2" fill="white"/>
+          <circle cx="40" cy="7.5" r="2" fill="#6E1324"/>
+          <rect x="30" y="11" width="20" height="8" rx="1" fill="white"/>
+          <rect x="18" y="19" width="13" height="86" rx="0" fill="white"/>
+          <path d="M31,19 L50,19 Q100,19 100,62 Q100,105 50,105 L31,105 L31,92 L50,92 Q84,92 84,62 Q84,32 50,32 L31,32 Z" fill="white"/>
+          <path d="M46,40 Q80,46 76,66 Q72,84 46,90 Q66,76 63,64 Q60,52 46,40 Z" fill="#6E1324"/>
+          <text x="108" y="103" font-family="Georgia,'Times New Roman',Times,serif" font-size="88" font-weight="normal" fill="white" letter-spacing="0">AGU</text>
+        </svg>
+      </div>
+      <p class="footer-tagline">Your destination for luxury fragrances in Addis Ababa. Designer originals, premium clones and rare Arabic exclusives — all under one roof.</p>
+      <div class="nl-wrap">
+        <input class="nl-input" type="email" placeholder=" " id="nlInput">
+        <label class="nl-lbl" for="nlInput">Join the VIP club — your email</label>
+        <button class="nl-submit">→</button>
+      </div>
+    </div>
+    <div>
+      <div class="f-head">Shop</div>
+      <ul class="f-links">
+        <li><a href="#sec-kings">For Kings</a></li>
+        <li><a href="#sec-queens">For Queens</a></li>
+        <li><a href="#sec-oud">Oud & Arabian</a></li>
+        <li><a href="#sec-designer">Designer Originals</a></li>
+        <li><a href="#sec-sets">Gift Sets</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="f-head">Support</div>
+      <ul class="f-links">
+        <li><a href="https://t.me/dagu_perfume" target="_blank">Order via Telegram</a></li>
+        <li><a href="tel:0993337235">Call 0993337235</a></li>
+        <li><a href="tel:0949064149">Call 0949064149</a></li>
+        <li><a href="https://www.tiktok.com/@dagu_perfume" target="_blank">TikTok @dagu_perfume</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="f-head">Visit Us</div>
+      <ul class="f-links">
+        <li><a href="#">Bole, Addis Ababa</a></li>
+        <li><a href="#">Bora Kids Mall</a></li>
+        <li><a href="#">Ground Floor G-02</a></li>
+        <li><a href="#">Mon–Sat 9AM–8PM</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 Dagu Perfume · Addis Ababa · All prices in Ethiopian Birr (ETB)</div>
+    <div class="social-row">
+      <a class="soc-big-btn soc-tg" href="https://t.me/dagu_perfume" target="_blank">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248-1.97 9.269c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.833.952z"/></svg>
+        <span>@dagu_perfume</span>
+      </a>
+      <a class="soc-big-btn soc-tt" href="https://www.tiktok.com/@dagu_perfume" target="_blank">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.75a8.27 8.27 0 004.84 1.55V6.85a4.85 4.85 0 01-1.07-.16z"/></svg>
+        <span>@dagu_perfume</span>
+      </a>
+    </div>
+  </div>
+  </div>
+</footer>
+
+<script>
+// ── CURSOR ──────────────────────────────────────────────────────
+const cur=document.getElementById('cur'),cur2=document.getElementById('cur2');
+let mx=0,my=0,fx=0,fy=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+(function a(){fx+=(mx-fx)*.1;fy+=(my-fy)*.1;cur2.style.left=fx+'px';cur2.style.top=fy+'px';requestAnimationFrame(a);})();
+document.addEventListener('mouseover',e=>{if(e.target.closest('button,a,.pcard,.snav-item,.pill'))document.body.classList.add('hov');});
+document.addEventListener('mouseout',e=>{if(e.target.closest('button,a,.pcard,.snav-item,.pill'))document.body.classList.remove('hov');});
+
+// ── PRELOADER ──────────────────────────────────────────────────
+setTimeout(()=>{document.getElementById('preloader').classList.add('ready');},200);
+setTimeout(()=>{document.getElementById('preloader').classList.add('out');},2000);
+setTimeout(()=>{document.getElementById('preloader').style.display='none';},3200);
+
+// ── HEADER SCROLL ──────────────────────────────────────────────
+window.addEventListener('scroll',()=>{
+  document.getElementById('mainHeader').classList.toggle('scrolled',window.scrollY>80);
+},{passive:true});
+
+// ── HERO CANVAS ────────────────────────────────────────────────
+(function(){
+  const cv=document.getElementById('heroCanvas');
+  const ctx=cv.getContext('2d');
+  let W,H;
+  const resize=()=>{W=cv.width=window.innerWidth;H=cv.height=window.innerHeight;};
+  resize(); window.addEventListener('resize',resize);
+  let mouseX=W/2,mouseY=H/2;
+  document.getElementById('hero').addEventListener('mousemove',e=>{mouseX=e.clientX;mouseY=e.clientY;});
+  const particles=Array.from({length:60},()=>({
+    x:Math.random(),y:Math.random()*1.2,vy:-(Math.random()*.5+.2),
+    vx:(Math.random()-.5)*.15,r:Math.random()*2+.3,
+    life:Math.random(),gold:Math.random()<.25
+  }));
+  let t=0;
+  const drawBottle=(cx,cy,s,a)=>{
+    ctx.save();ctx.globalAlpha=a;ctx.translate(cx,cy);
+    const g=ctx.createLinearGradient(-s*.4,-s,s*.4,s);
+    g.addColorStop(0,'rgba(200,160,80,.4)');
+    g.addColorStop(.5,'rgba(110,19,36,.15)');
+    g.addColorStop(1,'rgba(200,160,80,.2)');
+    ctx.fillStyle=g;
+    ctx.beginPath();
+    ctx.moveTo(-s*.22,-s*.6);ctx.bezierCurveTo(-s*.25,-s*.5,-s*.35,-s*.3,-s*.35,s*.15);
+    ctx.bezierCurveTo(-s*.35,s*.55,-s*.22,s*.65,0,s*.65);
+    ctx.bezierCurveTo(s*.22,s*.65,s*.35,s*.55,s*.35,s*.15);
+    ctx.bezierCurveTo(s*.35,-s*.3,s*.25,-s*.5,s*.22,-s*.6);ctx.closePath();ctx.fill();
+    ctx.strokeStyle=`rgba(200,160,80,${a*.5})`;ctx.lineWidth=.7;ctx.stroke();
+    ctx.beginPath();ctx.moveTo(-s*.22,-s*.6);ctx.lineTo(-s*.14,-s*.82);ctx.lineTo(-s*.08,-s*.9);
+    ctx.lineTo(s*.08,-s*.9);ctx.lineTo(s*.14,-s*.82);ctx.lineTo(s*.22,-s*.6);
+    ctx.strokeStyle=`rgba(200,160,80,${a*.35})`;ctx.stroke();
+    ctx.restore();
+  };
+  const draw=()=>{
+    ctx.clearRect(0,0,W,H);
+    const bg=ctx.createRadialGradient(W*.5,H*.4,0,W*.5,H*.4,W*.7);
+    bg.addColorStop(0,'rgba(110,19,36,.08)');bg.addColorStop(1,'rgba(14,6,8,0)');
+    ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
+    particles.forEach(p=>{
+      p.x+=p.vx*.001;p.y+=p.vy*.001;p.life+=.003;
+      if(p.y<-.1){p.y=1.1;p.x=Math.random();}
+      const alpha=p.life%1;const fade=alpha<.1?alpha*10:alpha>.8?(1-alpha)*5:1;
+      ctx.beginPath();ctx.arc(p.x*W,p.y*H,p.r,0,Math.PI*2);
+      ctx.fillStyle=p.gold?`rgba(200,160,80,${fade*.5})`:`rgba(110,19,36,${fade*.4})`;
+      ctx.fill();
+    });
+    const fl=Math.sin(t*.008)*14;
+    const mx2=(mouseX/W-.5),my2=(mouseY/H-.5);
+    drawBottle(W*.5+mx2*25,H*.44+fl+my2*18,Math.min(W,H)*.26,.9);
+    drawBottle(W*.22+mx2*12,H*.5+fl*.6,Math.min(W,H)*.13,.28);
+    drawBottle(W*.78+mx2*16,H*.48-fl*.4,Math.min(W,H)*.14,.24);
+    t++;requestAnimationFrame(draw);
+  };
+  draw();
+})();
+
+// ── DATA ────────────────────────────────────────────────────────
+// emoji images mapped by tag/vibe
+const BOTTLE_IMGS={
+  fresh:'🌊',floral:'🌸',woody:'🪵',oud:'🕌',sweet:'🍯',
+  spicy:'🌶️',oriental:'🌙',leather:'🧥',fruity:'🍑',gourmand:'🍫',aquatic:'🌊',misc:'🎁'
+};
+function getEmoji(tags,gender){
+  if(tags.includes('oud'))return'🕌';
+  if(tags.includes('floral')&&gender==='w')return'🌸';
+  if(tags.includes('gourmand'))return'🍫';
+  if(tags.includes('fresh')&&tags.includes('aquatic'))return'🌊';
+  if(tags.includes('woody'))return'🪵';
+  if(tags.includes('sweet'))return'🍯';
+  if(tags.includes('fruity'))return'🍑';
+  if(tags.includes('spicy'))return'🌶️';
+  if(gender==='m')return'🏺';
+  if(gender==='w')return'🌺';
+  return'🫧';
+}
+// bg gradients per section
+const SEC_COLORS={
+  'sec-kings':'rgba(74,100,160,.25)',
+  'sec-queens':'rgba(160,60,100,.25)',
+  'sec-oud':'rgba(160,120,40,.25)',
+  'sec-fresh':'rgba(40,140,160,.25)',
+  'sec-woody':'rgba(120,80,40,.25)',
+  'sec-sweet':'rgba(160,100,40,.25)',
+  'sec-unisex':'rgba(60,140,80,.25)',
+  'sec-designer':'rgba(160,140,60,.25)',
+  'sec-sets':'rgba(100,60,140,.25)',
+};
+
+const SECTIONS=[
+  {id:'sec-kings',emoji:'👑',tag:"Men's Collection",title:'For Kings',sub:'Bold, commanding and unforgettable — the finest men\'s fragrances from beast-mode Lattafas to iconic designer originals.'},
+  {id:'sec-queens',emoji:'🌹',tag:"Women's Collection",title:'For Queens',sub:'From dreamy florals to addictive gourmands — every scent a statement of elegance and confidence.'},
+  {id:'sec-oud',emoji:'🕌',tag:'Oud & Arabian',title:'Oud & Arabian Treasures',sub:'Deep resins, smoky amber, and centuries of Middle Eastern perfumery tradition.'},
+  {id:'sec-fresh',emoji:'🌊',tag:'Fresh & Aquatic',title:'Fresh & Aquatic',sub:'Clean, crisp, and alive — perfect for daily wear, warm days, and effortless confidence.'},
+  {id:'sec-woody',emoji:'🪵',tag:'Woody & Leather',title:'Woody & Leathery',sub:'Rich sandalwood, smoky vetiver, and raw leather — scents that leave a lasting trail.'},
+  {id:'sec-sweet',emoji:'🍯',tag:'Sweet & Gourmand',title:'Sweet & Gourmand',sub:'Vanilla, caramel, cocoa and sugar rush — the most addictive and crowd-pleasing profiles.'},
+  {id:'sec-unisex',emoji:'⚖️',tag:'Iconic Unisex',title:'Iconic Unisex',sub:'Timeless signatures that transcend gender — worn by everyone, remembered by all.'},
+  {id:'sec-designer',emoji:'💎',tag:'Designer Originals & Testers',title:'Designer Originals',sub:'Authentic originals and testers from Chanel, Dior, Tom Ford, YSL and more — the real deal.'},
+  {id:'sec-sets',emoji:'🎁',tag:'Sets, Splashes & More',title:'Sets, Splashes & Extras',sub:'Gift sets, body splashes, mini vials, kids perfumes and budget daily-wear picks.'},
+];
+
+const ALL=[
+  // KINGS
+  {no:1,brand:'Lattafa',name:'Asad Black',vibe:'Dior Sauvage Elixir clone — spicy, smoky, magnetic beast mode.',g:'m',size:'100ml',price:'4,500–5,999',tags:['spicy','woody','fresh'],sec:'sec-kings'},
+  {no:2,brand:'Lattafa',name:'Asad Bourbon',vibe:'Azzaro The Most Wanted clone — woody spice, warm whiskey leather.',g:'m',size:'100ml',price:'6,999',tags:['woody','spicy'],sec:'sec-kings'},
+  {no:3,brand:'Lattafa',name:'Asad Zanzibar',vibe:'Paco Rabanne Invictus Parfum clone — tropical fresh power.',g:'m',size:'100ml',price:'6,999',tags:['fresh','woody'],sec:'sec-kings'},
+  {no:15,brand:'Lattafa',name:'Fakhar Black',vibe:'YSL Y EDP clone — fresh iris, ginger and cedar masculinity.',g:'m',size:'100ml',price:'6,500',tags:['fresh','woody'],sec:'sec-kings'},
+  {no:18,brand:'Lattafa',name:'Fakhar Platin',vibe:'Crisp, masculine fresh-woody YSL Y line DNA.',g:'m',size:'100ml',price:'6,500',tags:['fresh','woody'],sec:'sec-kings'},
+  {no:26,brand:'Lattafa',name:'Ramz Silver',vibe:'JPG Ultra Male clone — pear, mint, vanilla powerhouse.',g:'m',size:'100ml',price:'3,999',tags:['sweet','fresh'],sec:'sec-kings'},
+  {no:32,brand:'Lattafa',name:'Maahir Black',vibe:'Very smoky, leather, villainous oud — dark and commanding.',g:'m',size:'100ml',price:'6,999',tags:['woody','oud','leather'],sec:'sec-kings'},
+  {no:33,brand:'Lattafa',name:'Maahir Silver',vibe:'PDM Sedley clone — fresh minty citrus with creamy woods.',g:'m',size:'100ml',price:'7,500',tags:['fresh','woody'],sec:'sec-kings'},
+  {no:41,brand:'Lattafa',name:'Ameer Black',vibe:'Warm spice, masculine date-night scent — oud and amber.',g:'m',size:'100ml',price:'3,999',tags:['spicy','oud'],sec:'sec-kings'},
+  {no:43,brand:'Lattafa',name:'His Confession',vibe:'Mandarin, cinnamon, leather — intense date-night signature.',g:'m',size:'100ml',price:'9,999',tags:['spicy','leather','woody'],sec:'sec-kings'},
+  {no:45,brand:'Lattafa',name:'Saheb',vibe:'Luxurious bergamot, ambergris and vanilla — elegant masculine.',g:'m',size:'100ml',price:'5,500',tags:['fresh','sweet'],sec:'sec-kings'},
+  {no:52,brand:'Lattafa',name:'Conf. Platinum',vibe:'Spicy citrus, crisp and masculine fresh.',g:'m',size:'100ml',price:'5,500',tags:['fresh','spicy'],sec:'sec-kings'},
+  {no:57,brand:'Rave',name:'Now Black',vibe:'Intense fruity pineapple with Aventus twist — casual beast.',g:'m',size:'100ml',price:'2,800–2,999',tags:['fresh','fruity'],sec:'sec-kings'},
+  {no:62,brand:'Afnan',name:'9 PM',vibe:'JPG Ultra Male clone — beast mode vanilla caramel powerhouse.',g:'m',size:'100ml',price:'6,500–6,999',tags:['sweet','gourmand'],sec:'sec-kings'},
+  {no:63,brand:'Afnan',name:'9 PM Rebel',vibe:'Vibrant pineapple and warm spices — a rebellious masculine.',g:'m',size:'100ml',price:'11,000',tags:['fruity','spicy'],sec:'sec-kings'},
+  {no:64,brand:'Afnan',name:'9 PM Elixir',vibe:'Deeper, spicier and smoother — the richer darker 9 PM.',g:'m',size:'100ml',price:'12,500',tags:['spicy','sweet'],sec:'sec-kings'},
+  {no:67,brand:'Afnan',name:'Turathi Blue',vibe:'Bvlgari Tygar / BDC clone — clean, powdery aquatic freshness.',g:'m',size:'100ml',price:'11,000',tags:['fresh','aquatic'],sec:'sec-kings'},
+  {no:68,brand:'Afnan',name:'Turathi Brown',vibe:'Oud Ispahan / rich warm and spicy woods — deep luxury.',g:'m',size:'100ml',price:'11,000',tags:['woody','oud','spicy'],sec:'sec-kings'},
+  {no:73,brand:'Afnan',name:'Supremacy Col. Ed.',vibe:'Creed Aventus / Absolu Aventus clone — the king of clones.',g:'m',size:'100ml',price:'14,999',tags:['fresh','fruity','woody'],sec:'sec-kings'},
+  {no:82,brand:'Maison Alhambra',name:'Glacier Ultra',vibe:'JPG Le Male clone — minty lavender, sweet vanilla masculinity.',g:'m',size:'100ml',price:'5,500',tags:['fresh','sweet'],sec:'sec-kings'},
+  {no:83,brand:'Maison Alhambra',name:'The Kingdom',vibe:'JPG Le Male Elixir — intensified rich vanilla amber spice.',g:'m',size:'100ml',price:'7,500',tags:['sweet','spicy'],sec:'sec-kings'},
+  {no:85,brand:'Maison Alhambra',name:"Yeah! Man",vibe:'YSL Y clone — clean iris, amber and ginger freshness.',g:'m',size:'100ml',price:'5,500',tags:['fresh','woody'],sec:'sec-kings'},
+  {no:89,brand:'French Avenue',name:'Liquid Brun',vibe:'PDM Althair clone — warm amber, plum and cashmere woods.',g:'m',size:'100ml',price:'11,999',tags:['woody','sweet'],sec:'sec-kings'},
+  {no:100,brand:'Armani',name:'Code EDT',vibe:'Iconic tonka, bergamot and guaiac wood — timeless seduction.',g:'m',size:'100ml',price:'13,000',tags:['woody','sweet'],sec:'sec-kings',orig:true},
+  {no:115,brand:'Paco Rabanne',name:'1 Million',vibe:'Blood mandarin, cinnamon, leather — the golden masculine classic.',g:'m',size:'100ml',price:'21,000',tags:['spicy','leather'],sec:'sec-kings',orig:true},
+  {no:117,brand:'Valentino',name:'Born In Roma',vibe:'Juicy apple, rock rose, vetiver — modern Italian masculine.',g:'m',size:'100ml',price:'28,000',tags:['woody','fresh'],sec:'sec-kings',orig:true},
+  {no:119,brand:'Burberry',name:'Hero',vibe:'Cedar, juniper and bergamot — a clean powerfully fresh hero.',g:'m',size:'100ml',price:'22,000',tags:['fresh','woody'],sec:'sec-kings',orig:true},
+  {no:120,brand:'Versace',name:'Eros EDP/Parfum',vibe:'Mint, vanilla and woodsy sensuality — the god of seduction.',g:'m',size:'100ml',price:'23,000–27,000',tags:['fresh','sweet','woody'],sec:'sec-kings',orig:true},
+  {no:122,brand:'Azzaro',name:'The Most Wanted',vibe:'Tobacco, cinnamon, hot amber — seductive masculine classic.',g:'m',size:'100ml',price:'28,000',tags:['spicy','sweet'],sec:'sec-kings',orig:true},
+  {no:128,brand:'Armaf',name:'Club de Nuit Intense Man',vibe:'Creed Aventus clone — pineapple, birch, musk, oakmoss legend.',g:'m',size:'105/200ml',price:'7,500–15,000',tags:['fresh','fruity','woody'],sec:'sec-kings'},
+  {no:129,brand:'Armaf',name:'Club de Nuit Urban Man',vibe:'Sauvage + Aventus hybrid — fresh, smoky and powerfully modern.',g:'m',size:'105ml',price:'12,000',tags:['fresh','woody'],sec:'sec-kings'},
+  {no:132,brand:'Rasasi',name:'Hawas / Hawas Ice',vibe:'Fresh aquatic with warm cinnamon — versatile masculine legend.',g:'m',size:'100ml',price:'6,999',tags:['fresh','aquatic','spicy'],sec:'sec-kings'},
+  {no:133,brand:'Rasasi',name:'Hawas Black',vibe:'Deep, darker interpretation — bold and intense Hawas.',g:'m',size:'100ml',price:'9,000–9,999',tags:['woody','spicy'],sec:'sec-kings'},
+  {no:134,brand:'Rasasi',name:'Hawas Malibu',vibe:'Tropical fruit cocktail — vibrant, beach-ready masculine.',g:'m',size:'100ml',price:'9,999–11,000',tags:['fresh','fruity'],sec:'sec-kings'},
+  {no:135,brand:'Rasasi',name:'Hawas Kobra',vibe:'LV Imagination clone — bright citrus suede freshness.',g:'m',size:'100ml',price:'9,999–11,000',tags:['fresh','woody'],sec:'sec-kings'},
+  {no:147,brand:'Ahmed Al Maghribi',name:'Kaaf',vibe:'Very fresh, clean and crisp — signature daily masculine.',g:'m',size:'100ml',price:'11,000',tags:['fresh'],sec:'sec-kings'},
+  {no:148,brand:'Rayhaan',name:'Lion',vibe:'Bold spicy and sweet — roaring masculine oriental pride.',g:'m',size:'100ml',price:'11,999',tags:['oud','spicy','sweet'],sec:'sec-kings'},
+  {no:106,brand:'Jean Paul Gaultier',name:'Le Male Le Parfum',vibe:'Intensified lavender, bergamot and warm tonka beast.',g:'m',size:'125ml',price:'31,999',tags:['sweet','fresh'],sec:'sec-kings',orig:true},
+  {no:107,brand:'Jean Paul Gaultier',name:'Le Male Elixir',vibe:'Dark, spicy and addictive amber — the Le Male evolved.',g:'m',size:'125ml',price:'29,999',tags:['spicy','sweet'],sec:'sec-kings',orig:true},
+  {no:121,brand:'Versace',name:'Eros Flame',vibe:'Rosewood, pepper, mineral notes — fiery masculine intensity.',g:'m',size:'100ml',price:'23,500–24,000',tags:['woody','spicy'],sec:'sec-kings',orig:true},
+
+  // QUEENS
+  {no:7,brand:'Lattafa',name:'Yara Pink',vibe:'Viral sweet strawberry milkshake and vanilla — TikTok famous.',g:'w',size:'100ml',price:'3,999',tags:['sweet','fruity','gourmand'],sec:'sec-queens'},
+  {no:8,brand:'Lattafa',name:'Yara Orange (Tous)',vibe:'Mango, coconut, passionfruit — tropical juicy femininity.',g:'w',size:'100ml',price:'3,999',tags:['fruity','sweet'],sec:'sec-queens'},
+  {no:9,brand:'Lattafa',name:'Yara White (Moi)',vibe:'Creamy peaches and cinnamon woods — soft and sensual.',g:'w',size:'100ml',price:'5,999',tags:['sweet','woody'],sec:'sec-queens'},
+  {no:10,brand:'Lattafa',name:'Yara Candy',vibe:'Green tangerine, strawberry fizz and vanilla — playful fizzy.',g:'w',size:'100ml',price:'N/A',tags:['sweet','fruity'],sec:'sec-queens'},
+  {no:14,brand:'Lattafa',name:"Bade'e Al Oud Blush",vibe:'Delicate rose milk, almond and meringue — dreamy feminine.',g:'w',size:'100ml',price:'7,500',tags:['floral','sweet'],sec:'sec-queens'},
+  {no:17,brand:'Lattafa',name:'Fakhar Rose',vibe:"Givenchy L'Interdit clone — iris, rose and vetiver elegance.",g:'w',size:'100ml',price:'6,500',tags:['floral','woody'],sec:'sec-queens'},
+  {no:19,brand:'Lattafa',name:'Eclaire',vibe:'Bianco Latte clone — caramel, milk, sugar, dessert-level gourmand.',g:'w',size:'100ml',price:'11,000',tags:['sweet','gourmand'],sec:'sec-queens'},
+  {no:25,brand:'Lattafa',name:'Hayaati Florence',vibe:'Grapefruit, lychee, vanilla — bright floral-fruity feminine.',g:'w',size:'100ml',price:'3,500',tags:['fruity','floral'],sec:'sec-queens'},
+  {no:38,brand:'Lattafa',name:'Nasmaat',vibe:'Fruity gourmand — caramel and blackcurrant sweetness.',g:'w',size:'100ml',price:'10,999',tags:['sweet','gourmand','fruity'],sec:'sec-queens'},
+  {no:39,brand:'Lattafa',name:'Haya',vibe:'Pink pepper, praline and vanilla — spicy-sweet feminine charm.',g:'w',size:'100ml',price:'6,500',tags:['sweet','spicy'],sec:'sec-queens'},
+  {no:40,brand:'Lattafa',name:'Qimmah',vibe:'Coffee, tonka bean, sweet spice — rich cozy feminine.',g:'w',size:'100ml',price:'3,500',tags:['sweet','gourmand'],sec:'sec-queens'},
+  {no:44,brand:'Lattafa',name:'Her Confession',vibe:'Tuberose, incense, florals — bold feminine declaration.',g:'w',size:'100ml',price:'9,999',tags:['floral','oriental'],sec:'sec-queens'},
+  {no:48,brand:'Lattafa',name:'Victoria',vibe:'Creamy lemon meringue pie and florals — luxury pastry chic.',g:'w',size:'100ml',price:'11,000',tags:['sweet','floral','gourmand'],sec:'sec-queens'},
+  {no:56,brand:'Lattafa',name:'Pride Tharwah Gold',vibe:'YSL Libre Intense clone — lavender, vanilla, musk freedom.',g:'w',size:'100ml',price:'11,999',tags:['floral','sweet'],sec:'sec-queens'},
+  {no:58,brand:'Rave',name:'Now Women Pink',vibe:'Marshmallow, strawberry — Burberry Her vibe, viral and sweet.',g:'w',size:'100ml',price:'3,300',tags:['sweet','fruity'],sec:'sec-queens'},
+  {no:59,brand:'Ard Al Zaafaran',name:'Bint Hooran',vibe:'Good Girl (Carolina Herrera) clone — cocoa, rose, tonka.',g:'w',size:'100ml',price:'3,999',tags:['sweet','floral'],sec:'sec-queens'},
+  {no:65,brand:'Afnan',name:'9 AM White',vibe:'Citrus and white florals — clean, fresh feminine morning.',g:'w',size:'100ml',price:'6,999',tags:['fresh','floral'],sec:'sec-queens'},
+  {no:71,brand:'Afnan',name:'Supremacy Purple',vibe:'Sweet oriental and fruits — rich indulgent feminine.',g:'w',size:'100ml',price:'12,000',tags:['sweet','oriental'],sec:'sec-queens'},
+  {no:72,brand:'Afnan',name:'Supremacy Pink',vibe:'Gardenia, honeysuckle and sweet florals — girly and fresh.',g:'w',size:'100ml',price:'12,000',tags:['floral','sweet'],sec:'sec-queens'},
+  {no:74,brand:'Afnan',name:'Modest Deux',vibe:'Scandal by Night vibe — berry, cocoa, dark feminine drama.',g:'w',size:'100ml',price:'14,999',tags:['sweet','fruity'],sec:'sec-queens'},
+  {no:75,brand:'Afnan',name:'Historic Doria',vibe:'Sweet fruity-floral and musky — elegant everyday feminine.',g:'w',size:'100ml',price:'12,999',tags:['fruity','floral'],sec:'sec-queens'},
+  {no:76,brand:'Afnan',name:'Souvenir Body Bliss',vibe:'Amber, musk, fruity sweet — irresistible skin scent.',g:'w',size:'100ml',price:'14,000',tags:['sweet','fruity'],sec:'sec-queens'},
+  {no:81,brand:'Maison Alhambra',name:'La Voie',vibe:'Giorgio Armani My Way clone — floral woods with neroli.',g:'w',size:'100ml',price:'4,999',tags:['floral','woody'],sec:'sec-queens'},
+  {no:94,brand:'Chanel',name:'Chance',vibe:'Fresh citrus, jasmine, white musk — the iconic Chanel feminine.',g:'w',size:'50ml',price:'13,200',tags:['floral','fresh'],sec:'sec-queens',orig:true},
+  {no:104,brand:'Armani',name:'My Way',vibe:'Bergamot, Indian tuberose, white musks — travel in a bottle.',g:'w',size:'90ml',price:'2,999',tags:['floral','fresh'],sec:'sec-queens'},
+  {no:108,brand:'Jean Paul Gaultier',name:'Scandal Pour Femme',vibe:'Honey, blood orange, gardenia — bold scandalous feminine.',g:'w',size:'80ml',price:'3,499',tags:['sweet','floral'],sec:'sec-queens'},
+  {no:109,brand:'YSL',name:'Libre EDP / Intense',vibe:'Lavender, vanilla, musk — the free modern feminine icon.',g:'w',size:'90ml',price:'6,500–25,000',tags:['floral','sweet'],sec:'sec-queens',orig:true},
+  {no:110,brand:'YSL',name:'Mon Paris',vibe:'Raspberry, white peony, white musks — romantic and passionate.',g:'w',size:'100ml',price:'2,999',tags:['fruity','floral'],sec:'sec-queens'},
+  {no:118,brand:'Burberry',name:'Goddess',vibe:'Lavender, bourbon vanilla — modern powerful feminine icon.',g:'w',size:'100ml',price:'29,999',tags:['floral','sweet'],sec:'sec-queens',orig:true},
+  {no:124,brand:'Calvin Klein',name:'Eternity For Women',vibe:'Freesia, lily, violet — clean timeless feminine classic.',g:'w',size:'100ml',price:'3,800',tags:['floral','fresh'],sec:'sec-queens'},
+  {no:127,brand:'Billie Eilish',name:'EDP',vibe:'Sugared petals, vanilla, musk — soft, dreamy, iconic.',g:'w',size:'100ml',price:'20,000–21,000',tags:['sweet','floral'],sec:'sec-queens',orig:true},
+  {no:131,brand:'Armaf',name:'Club de Nuit Intense Woman',vibe:'Chypre floral — rose, patchouli, stunning feminine presence.',g:'w',size:'105ml',price:'11,999',tags:['floral','woody'],sec:'sec-queens'},
+  {no:141,brand:'Zimaya',name:'Fatima',vibe:'PDM Delina clone — rose, rhubarb, musk — premium femininity.',g:'w',size:'100ml',price:'8,999',tags:['sweet','floral'],sec:'sec-queens'},
+
+  // OUD
+  {no:11,brand:'Lattafa',name:"Bade'e Al Oud Glory",vibe:'Oud For Greatness (Initio) clone — noble, smoky, divine oud.',g:'u',size:'100ml',price:'6,500',tags:['oud','oriental'],sec:'sec-oud'},
+  {no:12,brand:'Lattafa',name:"Bade'e Al Oud Amethyst",vibe:'Atomic Rose / oud blend — floral oud with rosy depth.',g:'u',size:'100ml',price:'5,500–6,500',tags:['oud','floral'],sec:'sec-oud'},
+  {no:31,brand:'Lattafa',name:'Opulent Black',vibe:'Heavy oriental oud profile — dark, smoky and magnetic.',g:'m',size:'100ml',price:'5,000',tags:['oud','oriental'],sec:'sec-oud'},
+  {no:35,brand:'Lattafa',name:'Art of Nature I',vibe:'Plum, blackcurrant, fig and oud — artistic and complex.',g:'u',size:'100ml',price:'11,000–12,000',tags:['oud','fruity'],sec:'sec-oud'},
+  {no:36,brand:'Lattafa',name:'Lail Maleki',vibe:'Sweet oriental — citrus, sandalwood and oud harmony.',g:'u',size:'100ml',price:'5,500–6,500',tags:['oud','oriental','sweet'],sec:'sec-oud'},
+  {no:55,brand:'Lattafa',name:'Ameer Al Oudh Int.',vibe:'Replica By The Fireplace vibe — sugar, vanilla and agarwood.',g:'u',size:'100ml',price:'3,800',tags:['oud','sweet'],sec:'sec-oud'},
+  {no:60,brand:'Ard Al Zaafaran',name:'Mousuf',vibe:'Chocolate, grape and warm woods — rich Middle Eastern depth.',g:'u',size:'100ml',price:'1,800–2,300',tags:['oud','sweet'],sec:'sec-oud'},
+  {no:61,brand:'Ard Al Zaafaran',name:'Riqqa',vibe:'Vanilla, cognac, cinnamon — warm arabesque oriental.',g:'u',size:'100ml',price:'5,999',tags:['oud','sweet','spicy'],sec:'sec-oud'},
+  {no:70,brand:'Afnan',name:'Supremacy In Oud',vibe:'Oud For Greatness clone — powerful noble oud with saffron.',g:'u',size:'100ml',price:'14,999',tags:['oud','oriental'],sec:'sec-oud'},
+  {no:86,brand:'Maison Alhambra',name:"Lueur D'Espoir Ambre Emir",vibe:'Smoky wood and sensual spice — deep Middle Eastern warmth.',g:'u',size:'100ml',price:'7,999',tags:['oud','spicy','woody'],sec:'sec-oud'},
+  {no:88,brand:'Paris Corner',name:'Ministry of Oud',vibe:'Spicy amber woods — exotic and warm oriental.',g:'u',size:'100ml',price:'4,999',tags:['oud','oriental','spicy'],sec:'sec-oud'},
+  {no:136,brand:'Al Haramain',name:'Amber Oud Gold Edition',vibe:'Precious amber and oud — the gold standard of Arabic luxury.',g:'u',size:'120ml',price:'14,999',tags:['oud','oriental'],sec:'sec-oud'},
+  {no:137,brand:'Al Haramain',name:'Amber Oud Blue Edition',vibe:'Aquatic amber oud — fresh meets deep in perfect balance.',g:'m',size:'120ml',price:'14,999',tags:['oud','aquatic'],sec:'sec-oud'},
+  {no:138,brand:'Ibrahim Al Qurashi',name:'White Regent Diamond',vibe:'Modern oud, fresh and vanilla blend — unisex confidence.',g:'u',size:'200ml',price:'N/A',tags:['oud','fresh'],sec:'sec-oud'},
+  {no:139,brand:'Ibrahim Al Qurashi',name:'Grey Pearl Diamond',vibe:'Sophisticated grey musk and oud pearl — signature unisex.',g:'u',size:'200ml',price:'N/A',tags:['oud','oriental'],sec:'sec-oud'},
+  {no:143,brand:'Zimaya',name:'Night Shadow',vibe:'LV Ombre Nomade clone — incense, papyrus and rose oud.',g:'u',size:'100ml',price:'10,000',tags:['oud','woody'],sec:'sec-oud'},
+  {no:144,brand:'Gissah',name:'Imperial Valley',vibe:'Exotic leathery and oriental notes — mysterious and rare.',g:'u',size:'100ml',price:'5,999',tags:['oud','leather','oriental'],sec:'sec-oud'},
+  {no:34,brand:'Lattafa',name:'Maahir Hair Mist',vibe:'Resin and amber floral hair mist — scented styling ritual.',g:'u',size:'50ml',price:'2,800',tags:['floral','oriental'],sec:'sec-oud'},
+
+  // FRESH
+  {no:24,brand:'Lattafa',name:'Hayaati Black',vibe:'Fresh citrus and woodsy — Invictus Aqua vibe, clean power.',g:'u',size:'100ml',price:'5,999',tags:['fresh','aquatic','woody'],sec:'sec-fresh'},
+  {no:66,brand:'Afnan',name:'9 AM Dive',vibe:'Bleu de Chanel + YSL Y mashup — clean aquatic freshness beast.',g:'u',size:'100ml',price:'7,999',tags:['fresh','aquatic'],sec:'sec-fresh'},
+  {no:77,brand:'Maison Alhambra',name:'Jean Lowe Azure',vibe:'LV Afternoon Swim clone — sparkling marine luminosity.',g:'u',size:'100ml',price:'9,999',tags:['fresh','aquatic'],sec:'sec-fresh'},
+  {no:78,brand:'Maison Alhambra',name:'Jean Lowe Fraiche',vibe:'LV Nouveau Monde clone — deep sea iris and sandalwood.',g:'u',size:'100ml',price:'9,999',tags:['fresh','aquatic','woody'],sec:'sec-fresh'},
+  {no:93,brand:'Chanel',name:'Bleu de Chanel EDP',vibe:'Citrus, incense, dry woods — the gold standard of masculinity.',g:'m',size:'100ml',price:'33,500',tags:['fresh','woody'],sec:'sec-fresh',orig:true},
+  {no:95,brand:'Dior',name:'Sauvage EDP/EDT',vibe:"Bergamot, ambroxan, pepper — the world's best-selling perfume.",g:'m',size:'100ml',price:'24,000–31,000',tags:['fresh','spicy'],sec:'sec-fresh',orig:true},
+  {no:96,brand:'Dior',name:'Sauvage Elixir',vibe:'Concentrated Sauvage — grapefruit, cinnamon, sandalwood beast.',g:'m',size:'60/100ml',price:'32,500–45,000',tags:['fresh','spicy','woody'],sec:'sec-fresh',orig:true},
+  {no:111,brand:'YSL',name:'Y EDP',vibe:'Fresh ginger, bergamot, sage and amber — modern masculine icon.',g:'m',size:'100ml',price:'28,000–29,000',tags:['fresh','woody'],sec:'sec-fresh',orig:true},
+  {no:123,brand:'Calvin Klein',name:'Obsession',vibe:'Citrus, spice and woods — the classic sensual unisex.',g:'u',size:'100ml',price:'11,999',tags:['fresh','spicy'],sec:'sec-fresh',orig:true},
+  {no:153,brand:'Emper',name:'Epic Adventure',vibe:'Woody citrus masculine — fresh everyday versatile pick.',g:'m',size:'100ml',price:'4,500–4,999',tags:['fresh','woody'],sec:'sec-fresh'},
+  {no:159,brand:'Dagu',name:'Ice EDP',vibe:'Cold fresh masculine daily — crisp, clean, budget pick.',g:'m',size:'100ml',price:'1,699',tags:['fresh'],sec:'sec-fresh'},
+
+  // WOODY
+  {no:37,brand:'Lattafa',name:'Liam Grey',vibe:'BDK Gris Charnel clone — fig, tea, spices and smoky woods.',g:'u',size:'100ml',price:'5,500–7,500',tags:['woody','spicy'],sec:'sec-woody'},
+  {no:79,brand:'Maison Alhambra',name:'Philos Messenger',vibe:'Sospiro Vibrato clone — smoky vetiver, amber, wood harmony.',g:'u',size:'100ml',price:'6,500',tags:['woody','spicy'],sec:'sec-woody'},
+  {no:84,brand:'Maison Alhambra',name:'Spectre Ghost',vibe:'Warm vanilla, wood and spices — mysterious and long-lasting.',g:'u',size:'80ml',price:'11,999',tags:['woody','sweet'],sec:'sec-woody'},
+  {no:91,brand:'French Avenue',name:"Tobacco D'Feu",vibe:'Rich tobacco, leather, incense, cumin then oud and sandalwood.',g:'u',size:'100ml',price:'N/A',tags:['woody','leather','spicy'],sec:'sec-woody'},
+  {no:112,brand:'Tom Ford',name:'Ombré Leather',vibe:'Leather, thyme, cardamom — raw sensual luxury skin scent.',g:'u',size:'100ml',price:'6,500',tags:['leather','woody'],sec:'sec-woody',orig:true},
+  {no:140,brand:'Zara',name:'Perfume',vibe:'Red Temptation, Vibrant Leather — bold modern femininity.',g:'w',size:'80ml',price:'6,999',tags:['leather','woody'],sec:'sec-woody'},
+  {no:156,brand:'Dagu',name:'Azure Royal',vibe:'Fresh pear, musk, orange — warm weather winning combination.',g:'u',size:'100ml',price:'8,999',tags:['fresh','woody'],sec:'sec-woody'},
+  {no:162,brand:'Dagu',name:'Brown Orchid + Deo',vibe:'Elegance sandalwood and sweet set — refined woody masculine.',g:'m',size:'set',price:'3,500',tags:['woody','sweet'],sec:'sec-woody'},
+  {no:155,brand:'Dagu',name:'La African Drummer',vibe:'Vibrant woody unisex scent — earthy, warm, rhythmic.',g:'u',size:'100ml',price:'8,500',tags:['woody','earthy'],sec:'sec-woody'},
+
+  // SWEET
+  {no:4,brand:'Lattafa',name:'Khamrah OG',vibe:"By Kilian Angels' Share twist — whiskey, rum, cinnamon and oak.",g:'u',size:'100ml',price:'6,500–7,000',tags:['sweet','gourmand'],sec:'sec-sweet'},
+  {no:5,brand:'Lattafa',name:'Khamrah Qahwa',vibe:"Angels' Share with rich arabica coffee — warm and addictive.",g:'u',size:'100ml',price:'6,999',tags:['sweet','gourmand'],sec:'sec-sweet'},
+  {no:6,brand:'Lattafa',name:'Khamrah Dukhan',vibe:'Masculine pimento, tobacco and amber — bold spiced gourmand.',g:'u',size:'100ml',price:'9,999',tags:['sweet','spicy'],sec:'sec-sweet'},
+  {no:20,brand:'Lattafa',name:'Nebras',vibe:'Billie Eilish EDP clone — cocoa, vanilla, creamy beast mode.',g:'u',size:'100ml',price:'7,500',tags:['sweet','gourmand'],sec:'sec-sweet'},
+  {no:21,brand:'Lattafa',name:'Ajwad',vibe:'Mancera Roses Vanille twist — vanilla rose and sandalwood.',g:'u',size:'100ml',price:'6,500',tags:['sweet','floral'],sec:'sec-sweet'},
+  {no:27,brand:'Lattafa',name:'Ramz Gold',vibe:'Pineapple, citrus, apple and vanilla — sweet fruity masculinity.',g:'u',size:'100ml',price:'4,999',tags:['sweet','fruity'],sec:'sec-sweet'},
+  {no:30,brand:'Lattafa',name:'Opulent Red',vibe:'Peach, saffron, cognac — warm oriental fruity richness.',g:'u',size:'100ml',price:'5,000',tags:['sweet','oriental'],sec:'sec-sweet'},
+  {no:51,brand:'Lattafa',name:'Conf. Private Gold',vibe:'Tiziana Terenzi Kirke clone — citrus blossom vanilla paradise.',g:'u',size:'100ml',price:'5,500',tags:['sweet','fruity'],sec:'sec-sweet'},
+  {no:80,brand:'Maison Alhambra',name:'Lovely Cherie',vibe:'Tom Ford Lost Cherry clone — cherry liqueur, tonka, almond.',g:'u',size:'80ml',price:'5,999',tags:['sweet','fruity'],sec:'sec-sweet'},
+  {no:87,brand:'Paris Corner',name:'Pendora Rouge',vibe:'BR540 style — jasmine, saffron, ambergris and cedar sweetness.',g:'u',size:'100ml',price:'2,999',tags:['sweet','floral'],sec:'sec-sweet'},
+  {no:92,brand:'Maison Alhambra',name:'Cocktail Intense',vibe:"By Kilian Angels' Share clone — boozy sweet spice perfection.",g:'u',size:'100ml',price:'4,999–5,500',tags:['sweet','gourmand'],sec:'sec-sweet'},
+  {no:142,brand:'Zimaya',name:'Amber Is Great',vibe:'Smooth vanilla, fruit and musk — crowd-pleasing elegance.',g:'u',size:'100ml',price:'7,999',tags:['sweet','oriental'],sec:'sec-sweet'},
+  {no:157,brand:'Dagu',name:'Vanilla Voyage & Aura',vibe:'Bakery level gourmand set — irresistible, warm, enveloping.',g:'u',size:'each',price:'12,000',tags:['sweet','gourmand'],sec:'sec-sweet'},
+  {no:16,brand:'Lattafa',name:'Fakhar Gold Extrait',vibe:'Paco Rabanne 1 Million Parfum clone — gold standard richness.',g:'u',size:'100ml',price:'6,500',tags:['sweet','spicy'],sec:'sec-sweet'},
+  {no:103,brand:'Emporio Armani',name:'Stronger With You Absolutely',vibe:'Vanilla, lavender, iris — the gourmand masculine powerhouse.',g:'m',size:'100ml',price:'22,000',tags:['sweet','floral'],sec:'sec-sweet',orig:true},
+
+  // UNISEX
+  {no:13,brand:'Lattafa',name:"Bade'e Al Oud Sublime",vibe:'Kayali Eden Juicy Apple — apple, caramel, sandalwood harmony.',g:'u',size:'100ml',price:'7,000',tags:['fruity','sweet','woody'],sec:'sec-unisex'},
+  {no:22,brand:'Lattafa',name:'Qaed Al Fursan Black',vibe:'Aventus/BR540 vibe — pineapple, saffron, smoky signature.',g:'u',size:'100ml',price:'2,500–2,800',tags:['fresh','fruity'],sec:'sec-unisex'},
+  {no:23,brand:'Lattafa',name:'Qaed Al Fursan White',vibe:'Creamy coconut and citrus — bright, clean and effortless.',g:'u',size:'100ml',price:'2,800',tags:['fresh','sweet'],sec:'sec-unisex'},
+  {no:28,brand:'Lattafa',name:'Shaheen Silver',vibe:'Creed Aventus clone — pineapple, birch, oakmoss, musk.',g:'u',size:'100ml',price:'6,500',tags:['fresh','fruity','woody'],sec:'sec-unisex'},
+  {no:29,brand:'Lattafa',name:'Shaheen Gold',vibe:'Deep woods, oud and sweet warmth — rich signature DNA.',g:'u',size:'100ml',price:'5,999',tags:['woody','sweet','oud'],sec:'sec-unisex'},
+  {no:49,brand:'Lattafa',name:'Ana Abiyedh White',vibe:'Erba Pura (Xerjoff) clone — lemon, coconut, vanilla paradise.',g:'u',size:'60ml',price:'4,500',tags:['fresh','sweet'],sec:'sec-unisex'},
+  {no:50,brand:'Lattafa',name:'Ana Abiyedh Rouge',vibe:'Baccarat Rouge 540 clone — ambergris, cedarwood, jasmine.',g:'u',size:'60ml',price:'4,500',tags:['sweet','woody'],sec:'sec-unisex'},
+  {no:54,brand:'Lattafa',name:"Ra'ed Luxe",vibe:'Pineapple, jasmine and watermelon — bright and uplifting.',g:'u',size:'100ml',price:'5,500–5,999',tags:['fruity','fresh'],sec:'sec-unisex'},
+  {no:69,brand:'Afnan',name:'Turathi Electric',vibe:'Blue Talisman clone — pear, fresh syrup, electric vivacity.',g:'u',size:'90ml',price:'13,999–14,000',tags:['fresh','fruity'],sec:'sec-unisex'},
+  {no:90,brand:'Maison Alhambra',name:'Island Vanilla Dunes',vibe:'PDM Althair clone — warm amber, vanilla and cashmere.',g:'u',size:'80ml',price:'11,999',tags:['sweet','woody'],sec:'sec-unisex'},
+  {no:114,brand:'MFK',name:'Baccarat Rouge 540',vibe:'Ambergris, jasmine, cedarwood — the legend itself.',g:'u',size:'100ml',price:'2,900–3,500',tags:['sweet','woody'],sec:'sec-unisex',orig:true},
+  {no:116,brand:'Creed',name:'Aventus',vibe:'Pineapple, birch, oakmoss — the king of modern perfumery.',g:'m',size:'100ml',price:'3,000–6,000',tags:['fresh','fruity','woody'],sec:'sec-unisex',orig:true},
+  {no:46,brand:'Lattafa',name:'Afeef',vibe:'Fresh florals — jasmine, orange blossom harmony.',g:'u',size:'100ml',price:'8,999–9,000',tags:['floral','fresh'],sec:'sec-unisex'},
+
+  // DESIGNER
+  {no:97,brand:'Dior',name:'Gris Dior (Tester)',vibe:'Rose, iris, white musk — understated unisex elegance.',g:'u',size:'full',price:'6,500',tags:['floral','fresh'],sec:'sec-designer',orig:true},
+  {no:98,brand:'Dior',name:'Miss Dior (Tester)',vibe:'Rose, peony, musk — the timeless feminine Dior icon.',g:'w',size:'full',price:'6,500',tags:['floral','fresh'],sec:'sec-designer',orig:true},
+  {no:99,brand:'Dior',name:'Hypnotic Poison (Tester)',vibe:'Almond, jasmine, vanilla — seductive and mysterious.',g:'w',size:'100ml',price:'6,500',tags:['sweet','oriental'],sec:'sec-designer',orig:true},
+  {no:101,brand:'Armani',name:'Code Profumo',vibe:'Apple, sage and tonka — the richer deeper Code expression.',g:'m',size:'100ml',price:'N/A',tags:['woody','sweet'],sec:'sec-designer',orig:true},
+  {no:102,brand:'Emporio Armani',name:'Stronger With You Intensely',vibe:'Chestnut, vanilla, tobacco, vetiver — intense masculine icon.',g:'m',size:'100ml',price:'27,000',tags:['sweet','woody'],sec:'sec-designer',orig:true},
+  {no:113,brand:'Tom Ford',name:'Black Orchid',vibe:'Black orchid, patchouli, dark chocolate — dark luxury icon.',g:'u',size:'100ml',price:'4,500–31,000',tags:['floral','oriental'],sec:'sec-designer',orig:true},
+  {no:125,brand:'Ralph Lauren',name:'Polo Blue',vibe:'Melon, suede, sage — the iconic clean masculine standard.',g:'m',size:'100ml',price:'3,999',tags:['fresh','aquatic'],sec:'sec-designer'},
+  {no:126,brand:'Givenchy',name:'Gentleman',vibe:'Iris, patchouli and vanilla — powdery refined masculinity.',g:'m',size:'100ml',price:'6,500',tags:['woody','sweet'],sec:'sec-designer'},
+  {no:105,brand:'Emporio Armani',name:"Because It's You",vibe:'Pink pepper, rose, caramel — warm and modern feminine.',g:'w',size:'100ml',price:'3,000',tags:['sweet','floral'],sec:'sec-designer'},
+  {no:130,brand:'Armaf',name:'Club de Nuit Woman',vibe:'Coco Mademoiselle clone — rose, patchouli, refined elegance.',g:'w',size:'105ml',price:'N/A',tags:['floral','woody'],sec:'sec-designer'},
+
+  // SETS
+  {no:149,brand:'Shaik',name:'Parfum Collections',vibe:'Highly requested Turkish original dupes — 20+ flavors in 50 & 100ml.',g:'u',size:'50/100ml',price:'2,800–5,500',tags:['misc'],sec:'sec-sets'},
+  {no:150,brand:'Shaik',name:'Bamboo Diffusers',vibe:'Shaik air-freshener sticks for rooms — elegant home scenting.',g:'u',size:'100ml',price:'2,499–2,800',tags:['misc'],sec:'sec-sets'},
+  {no:151,brand:'Fascination',name:'Dragon Mart',vibe:'Sweet, elegant Dubai export — crowd-pleasing oriental.',g:'u',size:'100ml',price:'6,999',tags:['sweet','oriental'],sec:'sec-sets'},
+  {no:152,brand:'Shalis',name:'Original',vibe:"Pink (women's floral) & Blue (men's citrus) — clean classics.",g:'u',size:'100ml',price:'2,499–2,500',tags:['fresh','floral'],sec:'sec-sets'},
+  {no:154,brand:'Dagu',name:'Candid Perfume',vibe:'JPG Scandal by Night vibe — dark berry, cocoa and warmth.',g:'w',size:'100ml',price:'3,999',tags:['sweet','floral'],sec:'sec-sets'},
+  {no:158,brand:'Dagu',name:'Black Power',vibe:'Vanilla, rose and sandalwood — strong masculine daily.',g:'m',size:'100ml',price:'1,399–1,499',tags:['sweet','woody'],sec:'sec-sets'},
+  {no:160,brand:'Caporal',name:'Trilogy Pour Femme',vibe:'Oriental clean feminine scent — affordable and wearable.',g:'w',size:'100ml',price:'2,000',tags:['oriental','floral'],sec:'sec-sets'},
+  {no:161,brand:'Emper',name:'Laila',vibe:'Mountain floral and watermelon — fresh and light feminine.',g:'w',size:'100ml',price:'5,500',tags:['floral','fresh'],sec:'sec-sets'},
+  {no:163,brand:'V.V. Love',name:'Lotion / Splash Set',vibe:'Splash and body lotion pack — skin-scenting essentials.',g:'u',size:'150+150ml',price:'~1,000',tags:['misc'],sec:'sec-sets'},
+  {no:164,brand:'Dagu',name:'Smart Perfumes',vibe:'Heavy duty lasting copy scents — budget daily pocket pick.',g:'u',size:'30ml',price:'499',tags:['misc'],sec:'sec-sets'},
+  {no:165,brand:'Dagu',name:'Mini Luxury Tester Vials',vibe:'Extrait tester pocket perfumes — try before you buy.',g:'u',size:'10ml',price:'499',tags:['misc'],sec:'sec-sets'},
+  {no:166,brand:'Dagu',name:'4-in-1 Gift Box',vibe:'Four variations of mixed gifts — perfect gifting solution.',g:'u',size:'4x25ml',price:'1,800',tags:['misc'],sec:'sec-sets'},
+  {no:167,brand:'Dagu',name:'Kids Perfume + Shower Gel',vibe:'Soothing baby / kid floral soap and scent — safe and gentle.',g:'u',size:'50ml set',price:'3,999',tags:['floral'],sec:'sec-sets'},
+  {no:168,brand:"Victoria's Secret",name:'Body Splashes',vibe:'Bare Vanilla, Midnight Blossom, Into the Night — VS classics.',g:'w',size:'varies',price:'2,999',tags:['sweet','floral'],sec:'sec-sets'},
+  {no:145,brand:'La Rive',name:"L'excellente",vibe:'Floral fruity — bright feminine affordable daily wear.',g:'w',size:'100ml',price:'3,499',tags:['floral','fruity'],sec:'sec-sets'},
+  {no:146,brand:'La Rive',name:'Her Choice',vibe:'Feminine La Rive — fresh floral everyday wearable.',g:'w',size:'100ml',price:'3,999',tags:['floral','fresh'],sec:'sec-sets'},
+  {no:42,brand:'Lattafa',name:'Ameerat Brown',vibe:'Citrus, aloe vera, musk — fresh light everyday feminine.',g:'w',size:'100ml',price:'3,999',tags:['fresh','floral'],sec:'sec-sets'},
+  {no:53,brand:'Lattafa',name:'Winners Trophy Silver',vibe:'Valentino Born in Roma Coral Fantasy — light, vivid, modern.',g:'u',size:'100ml',price:'9,500',tags:['fresh','floral'],sec:'sec-sets'},
+  {no:47,brand:'Lattafa',name:'Al Dirgham',vibe:'Orange blossom, floral vanilla — soft and elegant.',g:'u',size:'100ml',price:'5,999',tags:['floral','sweet'],sec:'sec-sets'},
+];
+
+// ── RENDER ──────────────────────────────────────────────────────
+let activeFilter='all', searchQ='';
+
+function gBadge(g){
+  if(g==='m')return'<span class="badge badge-m">Men</span>';
+  if(g==='w')return'<span class="badge badge-w">Women</span>';
+  return'<span class="badge badge-u">Unisex</span>';
+}
+
+function getBottleEmoji(p){
+  const t=p.tags,g=p.g;
+  if(t.includes('oud'))return'🕌';
+  if(t.includes('gourmand'))return'🍫';
+  if(t.includes('floral')&&g==='w')return'🌸';
+  if(t.includes('aquatic'))return'🌊';
+  if(t.includes('leather'))return'🪶';
+  if(t.includes('woody'))return'🪵';
+  if(t.includes('sweet'))return'🍯';
+  if(t.includes('fruity'))return'🍑';
+  if(t.includes('spicy'))return'🌶️';
+  if(g==='m')return'🏺';
+  if(g==='w')return'🌺';
+  return'🫧';
+}
+
+function buildCard(p,delay){
+  const emoji=getBottleEmoji(p);
+  const secColor=SEC_COLORS[p.sec]||'rgba(110,19,36,.15)';
+  return `<div class="pcard" style="animation-delay:${delay}ms" onclick="openPanel(${p.no})">
+    <div class="pcard-img" style="background:linear-gradient(135deg,${secColor},rgba(10,2,5,.88))">
+      <div class="pcard-bottle">${emoji}</div>
+      <div class="pcard-hover-hint">View Details</div>
+    </div>
+    <div class="pcard-info">
+      <div class="pcard-brand">${p.brand}</div>
+      <div class="pcard-name">${p.name}</div>
+      <div class="pcard-badges">
+        ${gBadge(p.g)}
+        <span class="badge badge-size">${p.size}</span>
+        ${p.orig?'<span class="badge badge-orig">Original</span>':'<span class="badge badge-clone">Clone</span>'}
+      </div>
+      ${p.price==='N/A'?'<div class="pcard-price-na">Price on request</div>':`<div class="pcard-price">${p.price} Br</div>`}
+    </div>
+  </div>`;
+}
+
+function render(){
+  const c=document.getElementById('content');
+  c.innerHTML='';
+  SECTIONS.forEach(sec=>{
+    let items=ALL.filter(p=>p.sec===sec.id);
+    if(searchQ) items=items.filter(p=>
+      p.name.toLowerCase().includes(searchQ)||
+      p.brand.toLowerCase().includes(searchQ)||
+      p.vibe.toLowerCase().includes(searchQ)||
+      p.tags.join(' ').includes(searchQ)
+    );
+    if(activeFilter!=='all'){
+      if(activeFilter==='men') items=items.filter(p=>p.g==='m');
+      else if(activeFilter==='women') items=items.filter(p=>p.g==='w');
+      else if(activeFilter==='unisex') items=items.filter(p=>p.g==='u');
+      else if(activeFilter==='oud') items=items.filter(p=>p.tags.includes('oud'));
+      else if(activeFilter==='fresh') items=items.filter(p=>p.tags.includes('fresh')||p.tags.includes('aquatic'));
+      else if(activeFilter==='sweet') items=items.filter(p=>p.tags.includes('sweet')||p.tags.includes('gourmand'));
+      else if(activeFilter==='woody') items=items.filter(p=>p.tags.includes('woody')||p.tags.includes('leather'));
+      else if(activeFilter==='designer') items=items.filter(p=>p.orig);
+      else if(activeFilter==='budget') items=items.filter(p=>{const n=parseFloat(p.price.replace(/[^0-9]/g,''));return !isNaN(n)&&n<5000;});
+      else if(activeFilter==='above5k') items=items.filter(p=>{const n=parseFloat(p.price.replace(/[^0-9]/g,''));return !isNaN(n)&&n>=5000;});
+      else if(activeFilter==='clone') items=items.filter(p=>!p.orig);
+    }
+    if(!items.length) return;
+    const el=document.createElement('div');
+    el.className='cat-sec';
+    el.id=sec.id;
+    el.innerHTML=`
+      <div class="sec-head" data-emoji="${sec.emoji}">
+        <div class="sh-left">
+          <div class="sh-tag">${sec.tag}</div>
+          <div class="sh-title">${sec.emoji} ${sec.title}</div>
+          <div class="sh-sub">${sec.sub}</div>
+        </div>
+        <div class="sh-right">
+          <div class="sh-count">${items.length}</div>
+          <div class="sh-count-l">Fragrances</div>
+        </div>
+      </div>
+      <div class="p-grid">${items.map((p,i)=>buildCard(p,i*20)).join('')}</div>`;
+    c.appendChild(el);
+  });
+  // update sidebar active
+  document.querySelectorAll('.snav-item').forEach(it=>{
+    const oc=it.getAttribute('onclick')||'';
+    const m=oc.match(/'([^']+)'/);
+    if(m) it.classList.toggle('active',!!document.getElementById(m[1]));
+  });
+  revealObserver();
+}
+
+// ── DETAIL PANEL ────────────────────────────────────────────────
+function openPanel(no){
+  const p=ALL.find(x=>x.no===no);if(!p)return;
+  const emoji=getBottleEmoji(p);
+  const secColor=SEC_COLORS[p.sec]||'rgba(110,19,36,.25)';
+  document.getElementById('dpBottle').textContent=emoji;
+  document.getElementById('dpImg').style.background=`linear-gradient(135deg,${secColor},rgba(10,2,5,.9))`;
+  document.getElementById('dpNo').textContent=`#${String(p.no).padStart(3,'0')}`;
+  document.getElementById('dpBrand').textContent=p.brand;
+  document.getElementById('dpName').textContent=p.name;
+  document.getElementById('dpVibe').textContent=p.vibe;
+  document.getElementById('dpPrice').textContent=p.price==='N/A'?'—':p.price+' Br';
+  document.getElementById('dpPrice').className=p.price==='N/A'?'dp-price-na':'dp-price-val';
+  document.getElementById('dpSizeBadge').innerHTML=`<span class="badge badge-size" style="font-size:10px;padding:5px 10px">${p.size}</span>`;
+  document.getElementById('dpBadges').innerHTML=
+    gBadge(p.g)+
+    (p.orig?'<span class="badge badge-orig" style="font-size:8px;padding:3px 8px">Original</span>':'<span class="badge badge-clone" style="font-size:8px;padding:3px 8px">Clone / Alt</span>')+
+    p.tags.filter(t=>t!=='misc').slice(0,3).map(t=>`<span class="badge" style="font-size:7px;padding:2px 7px;background:rgba(110,19,36,.15);border:1px solid rgba(110,19,36,.3);color:rgba(245,237,224,.5)">${t}</span>`).join('');
+  document.getElementById('detailPanel').classList.add('open');
+  document.getElementById('dpBackdrop').classList.add('open');
+  document.body.style.overflow='';
+}
+function closePanel(){
+  document.getElementById('detailPanel').classList.remove('open');
+  document.getElementById('dpBackdrop').classList.remove('open');
+}
+
+// ── FILTER / SEARCH ─────────────────────────────────────────────
+function setFilter(f,btn){
+  activeFilter=f;
+  document.querySelectorAll('.pill').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+  render();
+}
+function doSearch(){
+  searchQ=document.getElementById('searchInput').value.toLowerCase().trim();
+  render();
+}
+function goTo(id){
+  const el=document.getElementById(id);
+  if(el)el.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+// ── REVEAL ──────────────────────────────────────────────────────
+const ro=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis');});
+},{threshold:.1});
+function revealObserver(){
+  document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+}
+revealObserver();
+
+// ── SCROLL SPY ──────────────────────────────────────────────────
+const secObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const id=e.target.id;
+      document.querySelectorAll('.snav-item').forEach(it=>{
+        const oc=it.getAttribute('onclick')||'';
+        it.classList.toggle('active',oc.includes(`'${id}'`));
+      });
+    }
+  });
+},{threshold:.2,rootMargin:'-80px 0px 0px 0px'});
+
+render();
+setTimeout(()=>{
+  document.querySelectorAll('.cat-sec').forEach(s=>secObs.observe(s));
+},200);
+</script>
+</body>
+</html>
