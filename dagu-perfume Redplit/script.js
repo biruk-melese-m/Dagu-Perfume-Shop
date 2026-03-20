@@ -684,7 +684,7 @@ function goToStep1() {
   document.getElementById('coStep2').style.display = 'none';
 }
 
-function submitOrder() {
+async function submitOrder() {
   const txId = document.getElementById('coTxId').value.trim();
   const err = document.getElementById('coErr2');
   const btn = document.getElementById('coSubmitBtn');
@@ -696,14 +696,44 @@ function submitOrder() {
   btn.disabled = true;
   btn.textContent = 'Placing order…';
 
-  // Fallback demo flow
-  setTimeout(() => {
+  const name = document.getElementById('coName').value.trim();
+  const phone = document.getElementById('coPhone').value.trim();
+  const total = cartTotal();
+  const orderData = {
+    customerName: name,
+    customerPhone: phone,
+    paymentMethod: selectedPayment,
+    transactionId: txId,
+    totalAmount: total,
+    items: cart.map(i => ({ no: i.no, name: i.name, brand: i.brand, qty: i.qty, price: i.price, size: i.size })),
+    timestamp: firebase.firestore.FieldValue.serverTimestamp()
+  };
+
+  try {
+    if (!db || firebaseConfig.apiKey === "YOUR_API_KEY") {
+      throw new Error("Firebase database not initialized. Please update firebaseConfig.");
+    }
+    
+    // Add a new document to the "orders" collection
+    const docRef = await db.collection("orders").add(orderData);
+    
     closeCheckout();
-    const ref = 'DGU-' + Date.now().toString(36).toUpperCase();
-    showSuccess(ref, document.getElementById('coName').value.trim());
+    const ref = 'DGU-' + docRef.id.slice(-6).toUpperCase();
+    showSuccess(ref, name);
     cart = [];
     updateCartCount();
-  }, 800);
+    
+    // Reset button
+    btn.disabled = false;
+    btn.textContent = 'Place Order 🎉';
+  } catch (error) {
+    console.error("Error adding order document: ", error);
+    err.textContent = '⚠ Error placing order. Please make sure Firebase is properly configured.';
+    
+    // Reset button
+    btn.disabled = false;
+    btn.textContent = 'Place Order 🎉';
+  }
 }
 
 function showSuccess(ref, name) {
